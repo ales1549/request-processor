@@ -12,11 +12,23 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class NotificationService {
 
+    private final Map<String, NotificationStrategy> strategies;
 
     public void process(NotificationRequest request){
+        String strategyName = resolveStrategyName(request.getType());
+        NotificationStrategy strategy = strategies.get(strategyName);
          if(strategy == null){
              throw new IllegalArgumentException("Неизвестный тип уведомления: " + request.getType());
          }
          strategy.process(request.getMessage());
+    }
+
+    public String resolveStrategyName(NotificationType type){
+        return switch(type){
+            case SMS -> "smsStrategy";
+            case EMAIL -> "emailStrategy";
+            case PUSH -> "pushStrategy";
+            case TG_MESSAGE -> "telegramStrategy";
+        };
     }
 }

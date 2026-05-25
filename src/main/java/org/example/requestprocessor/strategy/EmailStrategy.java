@@ -3,7 +3,6 @@ package org.example.requestprocessor.strategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.requestprocessor.model.NotificationOutbox;
-import org.example.requestprocessor.model.enums.NotificationType;
 import org.example.requestprocessor.repository.NotificationOutboxRepository;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +15,6 @@ import java.util.UUID;
 public class EmailStrategy implements NotificationStrategy {
 
     private final NotificationOutboxRepository notificationRepository;
-
-    @Override
-    public NotificationType getType() {
-        return NotificationType.EMAIL;
-    }
 
     @Override
     public void process(String message){
