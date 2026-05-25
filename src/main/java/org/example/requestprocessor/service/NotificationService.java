@@ -25,10 +25,9 @@ public class NotificationService {
 
     public void process(NotificationRequest request){
         NotificationStrategy strategy = strategies.get(request.getType());
-         if(strategy == null){
-             throw new IllegalArgumentException("Неизвестный тип уведомления: " + request.getType());
-         }
-         strategy.process(request.getMessage());
+        if(strategy == null){
+            throw new IllegalArgumentException("неизвестный тип уведомления: " + request.getType());
+        }
+        strategy.process(request.getMessage());
     }
-
 }
